@@ -1,0 +1,64 @@
+---
+title: "warmup 1"
+output: github_document
+---
+##Leah Organa
+A famous quote by **Leia Organa**
+
+ > *"I feel like because I can fight, I have to,*
+ > *for those who cannot. And I think you might be the same way."*
+
+![Princess Leia](C:\Users\jonis\Pictures\Leia_Organa_TLJ.png)
+
+Description | Values
+------------|--------
+Species     | Human
+Gender      | Female
+Height      | 1.5 m
+Alignment   | light
+
+
+##Frozen Coconut Limeade (Limonada de Coco)
+![Limonada de Coco](C:\Users\jonis\Pictures\froz limade.jpg)
+
+__Ingredients__
+
+* 2 1/2 cups crushed or small ice cubes
+* 1 cup coconut milk, well-shaken if from a can
+* 1/3 cup lime juice (from about 3 limes)
+* 3 tablespoons granulated or superfine sugar (more or less to taste)
+* Lime slices for garnish
+* a blender
+
+__Instructions__
+
+-Place all ingredients except the Lime slices in a blender
+
+-Blend to the desired consistency
+
+-Place desired garnishes, including alternatives like nutmeg
+
+
+__Other Info__
+
+-Serves 3
+
+-Best in summer
+
+
+##__Euclidean Distance__
+
+_Definition_
+------------------------------------------------
+The Euclidean distance between points p and q is the length of the line segment connecting them ($\overline{\textbf{pq}}$)
+
+In Cartesian coordinates, if __p =__ $(p_1, p_2, ..., p_n)$ and __q =__ $(q_1, q_2, ..., q_n)$ are two points in Euclidean n-space, then the distance (d) from __p__ to __q__ or from __q__ to __p__ is given by the Pythagorean formula:
+
+$d(\textbf{p,q}) = (\textbf{q,p}) = \sqrt{(q_1-p_1)^2+(q_2-p_2)^2+... +(q_n-p_n)^2}$
+$= \sqrt{\sum_{i=1}^{n} (q_i-p_i)^2}$
+
+The position of a point in a Euclidean _n_-space is a Euclidean vector. So, __p__ and __q__ may be represented as Euclidean vectors, starting from the origin of the space (initial point) with their tips (terminal points) ending at the two points. The __Euclidean norm__, or __Euclidean length__, or __magnitude__ of a vector measures the length of the vector:
+
+$||\textbf{p}|| = \sqrt{p_1^2 + p_2^2 + ... + p_n^2} = \sqrt{\textbf{p} \cdot \textbf{p}}$
+
+where the last expression involves the dot product.
