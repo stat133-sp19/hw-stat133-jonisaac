@@ -1,0 +1,54 @@
+---
+title: "workout01-Jonathan-Isaac"
+authot: "Jonathan Isaac"
+output: github_document
+---
+
+_The Golden State Warriors and Shooting Accuracy_
+
+The Golden State Warriors have built a reputation, even more so than other NBA teams, of how accurate their shooting is. This raises the question, "How accurate are the Warriors, really?" . Below is pictured charts of the starting players shots over the 2016 season.
+
+```{r out.width='90%', echo=FALSE, fig.align='center'}
+knitr::include_graphics('../images/shot-charts.png')
+```
+
+  As you can see from these charts, The Golden State Warriors starting players have a predilection toward the outside shot, especially the 3 pointer. As anyone who will have played pickup basketball in a park in California will tell you, these players, and especially Stephen Curry, have popularized the playstyle centering on the outside shot. Conventional basketball wisdom tells us that this playstyle is a highly risky game plan and is ill advised, however, the Warriors have taken this high risk/reward game play to the finals multiple times. This is what prompts us to look to the numbers to see if the conventional wisdom is simply wrong, and if the exciting drive to the rim playstyle is just a thing which older or more traditional hoopheads (like me) will mourn the loss of.
+  
+  
+__tables__
+
+```{r comment="", include=FALSE}
+library(ggplot2)
+library(dplyr)
+shots <- read.csv("../data/shots-data.csv", stringsAsFactors = F)
+```
+
+
+```{r 2-Pointer Data, echo=FALSE, message=FALSE, warning=FALSE, comment="", paged.print=FALSE}
+two_pointers <- group_by(shots, player) %>%
+  summarise(total = sum(shot_type == "2PT Field Goal"), made = sum(shot_type == "2PT Field Goal" & shot_made_flag == "shot_yes"), perc_made = 100*sum(shot_type == "2PT Field Goal" & shot_made_flag == "shot_yes")/sum(shot_type == "2PT Field Goal"))
+arrange(two_pointers, desc(perc_made))
+```
+
+```{r 3-Pointer Data, echo=FALSE, message=FALSE, comment=""}
+three_pointers <- group_by(shots, player) %>%
+  summarise(total = sum(shot_type == "3PT Field Goal"), made = sum(shot_type == "3PT Field Goal" & shot_made_flag == "shot_yes"), perc_made = 100*sum(shot_type == "3PT Field Goal" & shot_made_flag == "shot_yes")/sum(shot_type == "3PT Field Goal"))
+arrange(three_pointers, desc(perc_made))
+```
+
+```{r All Shots Data, echo=FALSE, message=FALSE, comment=""}
+total_shots <- group_by(shots, player) %>%
+  summarise(total = sum(shot_type == "2PT Field Goal" | shot_type == "3PT Field Goal"), made = sum(shot_type == "2PT Field Goal" | shot_type == "3PT Field Goal" & shot_made_flag == "shot_yes"), perc_made = 100*sum(shot_type == "2PT Field Goal" | shot_type == "3PT Field Goal" & shot_made_flag == "shot_yes")/sum(shot_type == "2PT Field Goal" | shot_type == "3PT Field Goal"))
+arrange(total_shots, desc(perc_made))
+
+```
+
+When it comes down to the numbers, one can clearly see that in terms of __accuracy__, the conventional wisdom hold. Kevin durant for instance takes far more 2 point shots than 3 point shots, and is the most accurate shooter of the starting 5. However, it remains to be seen if the playstyle can still be justified by the increased reward for hitting a 3 pointer. in the next table, value will be determined by the amount of points each player brings in for the team. Here, the amount of points scored per possesion is the satistic of interest, since rebounding is a solid part of most NBA level teams. This means that attempting a shot and missing most often costs the offensive team possesion of the ball, and therefore the cost of a high risk shot might be outweighed by this loss of possesion.
+
+```{r Value in Points, echo=FALSE, message=FALSE, comment=""}
+overall_value <- group_by(shots, player) %>%
+  summarise(total_points_attempted = 3*sum(shot_type == "3PT Field Goal") + 2*sum(shot_type == "2PT Field Goal"), total_scored = 3*sum(shot_type == "3PT Field Goal" & shot_made_flag == "shot_yes") + 2*sum(shot_type == "2PT Field Goal" & shot_made_flag == "shot_yes"), points_per_possesion = (3*sum(shot_type == "3PT Field Goal" & shot_made_flag == "shot_yes") + 2*sum(shot_type == "2PT Field Goal" & shot_made_flag == "shot_yes"))/(sum(shot_type == "3PT Field Goal") + sum(shot_type == "2PT Field Goal")))
+arrange(overall_value, desc(points_per_possesion))
+```
+And here we can see that Kevin Durant and Andre Iguodala, two players who attempt 2 pointers more often than 3 pointers, are likely to produce the most point value for a given set of possesions.
+
