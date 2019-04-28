@@ -1,0 +1,63 @@
+---
+title: "The Binomial Package"
+author: "Jonathan Isaac"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+```{r}
+library("binomial")
+```
+
+## The Binomial Distribution
+
+The most common discrete probability distribution, most often exemplified by a series of coin flips. This package allows a user to explore important questions like, "What are the odds of flipping a fair coin heads 3 out of 4 tosses?"
+
+## Answering the question
+
+Quickly lets answer this question before moving on to more spectacular things.
+
+```{r}
+bin_probability(success = 3, trials = 4, prob = .5)
+```
+
+So as you can see, specifying `success` for the amount of successful results, `trials` the number of trials, and `prob` the porbability of the successful outcome, we can answer any such question.
+
+## Seeing results visually
+ 
+We can see the answers to a wide variety of these kinds of questions, if we graph them!
+
+```{r}
+dist <- bin_distribution(100, .5)
+plot.bindis(dist)
+```
+
+As well, we can see the probability of getting more or fewer than a certain amount of successes.
+
+```{r}
+cumu <- bin_cumulative(100, .5)
+plot.bincum(cumu)
+```
+
+## More data
+
+We can see detailed info on these distributions using bin_variable and summary.binvar, 
+where the output of bin_variable is an input to summary.binvar.
+
+```{r}
+vars <- bin_variable(100, .5)
+summary.binvar(vars)
+```
+
+
+
